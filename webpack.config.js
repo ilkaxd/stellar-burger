@@ -48,9 +48,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new ESLintPlugin({
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
-    }),
+    // TODO: Вернуть
+    // new ESLintPlugin({
+    //   extensions: ['.js', '.jsx', '.ts', '.tsx']
+    // }),
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
@@ -90,6 +91,7 @@ module.exports = {
     compress: true,
     historyApiFallback: true,
     port: 4000,
-    open: true
+    open: true,
+    hot: true,
   }
 };
