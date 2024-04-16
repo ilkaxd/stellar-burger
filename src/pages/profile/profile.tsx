@@ -9,8 +9,8 @@ export const Profile: FC = () => {
   const error = useSelector(errorSelector);
 
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+    name: user?.name!,
+    email: user?.email!,
     password: ''
   });
 
@@ -35,8 +35,8 @@ export const Profile: FC = () => {
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
     setFormValue({
-      name: user.name,
-      email: user.email,
+      name: user?.name!,
+      email: user?.email!,
       password: ''
     });
   };
@@ -55,7 +55,7 @@ export const Profile: FC = () => {
       handleCancel={handleCancel}
       handleSubmit={handleSubmit}
       handleInputChange={handleInputChange}
-      updateUserError={error}
+      updateUserError={error!}
     />
   );
 };

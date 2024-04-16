@@ -33,9 +33,9 @@ export const BurgerConstructor: FC = () => {
     const { bun, ingredients } = constructorItems;
     if (!constructorItems.bun || orderRequest) return;
     const orderData: string[] = [
-      bun._id,
+      bun?._id!,
       ...ingredients.map((ingredient) => ingredient._id),
-      bun._id
+      bun?._id!
     ];
     dispatch(orderBurgerThunk(orderData));
   };

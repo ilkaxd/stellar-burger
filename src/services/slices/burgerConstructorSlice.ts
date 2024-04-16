@@ -3,7 +3,7 @@ import { TConstructorIngredient, TIngredient } from '../../utils/types';
 
 export interface burgerConstructorState {
   burgerConstructor: {
-    bun: TConstructorIngredient;
+    bun: TConstructorIngredient | null;
     ingredients: TConstructorIngredient[];
   };
   error: string | null;

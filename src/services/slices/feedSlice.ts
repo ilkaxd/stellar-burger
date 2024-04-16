@@ -58,7 +58,7 @@ const feedSlice = createSlice({
       })
       .addCase(getFeedsThunk.rejected, (state, action) => {
         state.isFeedsLoading = false;
-        state.error = action.error.message;
+        state.error = action.error.message!;
       })
       .addCase(getFeedsThunk.fulfilled, (state, action) => {
         state.isFeedsLoading = false;
@@ -72,7 +72,7 @@ const feedSlice = createSlice({
         state.isOrderLoading = true;
       })
       .addCase(getOrderByNumberThunk.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.error = action.error.message!;
         state.isOrderLoading = false;
       })
       .addCase(getOrderByNumberThunk.fulfilled, (state, action) => {
