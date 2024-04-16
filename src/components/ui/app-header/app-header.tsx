@@ -66,7 +66,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
             )}
             to={'/profile'}
           >
-            <ProfileIcon type={currentLocation === '/profile' ? 'primary' : 'secondary'} />
+            <ProfileIcon
+              type={currentLocation === '/profile' ? 'primary' : 'secondary'}
+            />
             <p className='text text_type_main-default ml-2'>
               {userName || 'Личный кабинет'}
             </p>

@@ -1,9 +1,4 @@
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import '../../index.css';
 import styles from './app.module.css';
 
