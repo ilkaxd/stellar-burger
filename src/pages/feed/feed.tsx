@@ -10,12 +10,19 @@ export const Feed: FC = () => {
   const orders: TOrder[] = useSelector(ordersSelector);
 
   useEffect(() => {
-    dispatch(getFeedsThunk);
+    dispatch(getFeedsThunk());
   }, []);
 
   if (!orders.length) {
     return <Preloader />;
   }
 
-  <FeedUI orders={orders} handleGetFeeds={() => {dispatch(getFeedsThunk)}} />;
+  return (
+    <FeedUI
+      orders={orders}
+      handleGetFeeds={() => {
+        dispatch(getFeedsThunk());
+      }}
+    />
+  );
 };

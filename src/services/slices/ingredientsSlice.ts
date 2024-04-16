@@ -14,6 +14,9 @@ const initialState: IngredientsState = {
   error: null
 };
 
+/**
+ * Асинхронно подгружаем ингредиенты
+ */
 export const getIngredientsThunk = createAsyncThunk(
   'ingredients/getIngredients',
   async () => getIngredientsApi()

@@ -29,7 +29,8 @@ const orderSlice = createSlice({
   },
   reducers: {
     clearOrder: (state) => {
-      state = initialState;
+      state.order = null;
+      state.isOrderLoading = false;
     }
   },
   extraReducers(builder) {
