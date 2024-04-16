@@ -4,28 +4,20 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useSelector, useDispatch } from '../../services/store';
 import { useParams } from 'react-router-dom';
-import { getOrderByNumberThunk } from 'src/services/slices/feedSlice';
+import { getOrderByNumberThunk } from '../../services/slices/feedSlice';
+import { orderSelector } from '../../services/slices/feedSlice';
+import { ingredientsSelector } from '../../services/slices/ingredientsSlice';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { number } = useParams();
 
   useEffect(() => {
-    // dispatch(getOrderByNumberThunk(Number(number)));
+    dispatch(getOrderByNumberThunk(Number(number)));
   }, [])
 
-
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
-
-  const ingredients: TIngredient[] = [];
+  const orderData = useSelector(orderSelector);
+  const ingredients = useSelector(ingredientsSelector);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -57,9 +49,7 @@ export const OrderInfo: FC = () => {
     );
 
     const total = Object.values(ingredientsInfo).reduce(
-      // TODO: вернуть
-      // (acc, item) => acc + item.price * item.count,
-      (acc, item) => acc,
+      (acc, item) => acc + item.price * item.count,
       0
     );
 
@@ -75,6 +65,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  // return <OrderInfoUI orderInfo={orderInfo} />;
-  return null;
+  return <OrderInfoUI orderInfo={orderInfo} />;
 };

@@ -3,13 +3,16 @@ import { getFeedsApi, getOrderByNumberApi } from '../../utils/burger-api';
 import { TOrder } from '../../utils/types';
 
 /**
- * Подгружаем все заказы из потока
+ * Асинхронно подгружаем все заказы из потока
  */
 export const getFeedsThunk = createAsyncThunk('feeds/getFeeds', async () =>
   getFeedsApi()
 );
 
-
+/**
+ * Асинхронно подгружаем заказ по его номеру
+ * @param number Номер интересуемого заказа
+ */
 export const getOrderByNumberThunk = createAsyncThunk(
   'orders/getOrder',
   async (number: number) => getOrderByNumberApi(number)
@@ -41,12 +44,15 @@ const feedSlice = createSlice({
   selectors: {
     ordersSelector: (state) => state.orders,
     isFeedsLoadingSelector: (state) => state.isFeedsLoading,
+    orderSelector: (state) => state.order,
+    isOrderLoadingSelector: (state) => state.isOrderLoading,
     totalSelector: (state) => state.total,
     totalTodaySelector: (state) => state.totalToday
   },
   reducers: {},
   extraReducers(builder) {
     builder
+      // Подгружаем все заказы
       .addCase(getFeedsThunk.pending, (state) => {
         state.isFeedsLoading = true;
       })
@@ -61,7 +67,7 @@ const feedSlice = createSlice({
         state.totalToday = action.payload.totalToday;
       })
 
-      // Подгружаем заказ
+      // Подгружаем конкретный заказ
       .addCase(getOrderByNumberThunk.pending, (state) => {
         state.isOrderLoading = true;
       })
@@ -70,7 +76,6 @@ const feedSlice = createSlice({
         state.isOrderLoading = false;
       })
       .addCase(getOrderByNumberThunk.fulfilled, (state, action) => {
-        // TODO: Отработать ситуацию, когда нет данных
         state.order = action.payload.orders[0];
         state.isOrderLoading = false;
       });
@@ -80,6 +85,10 @@ const feedSlice = createSlice({
 export const {
   ordersSelector,
   isFeedsLoadingSelector,
+
+  orderSelector,
+  isOrderLoadingSelector,
+
   totalSelector,
   totalTodaySelector
 } = feedSlice.selectors;
