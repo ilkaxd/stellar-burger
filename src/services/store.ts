@@ -5,10 +5,27 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-const store = {};
+import burgerConstructor from './slices/burgerConstructorSlice';
+import feed from './slices/feedSlice';
+import ingredients from './slices/ingredientsSlice';
+import order from './slices/orderSlice';
+import user from './slices/userSlice';
 
-export type RootState = any;
+export const rootReducer = combineReducers({
+  burgerConstructor,
+  feed,
+  ingredients,
+  order,
+  user
+});
+
+const store = configureStore({
+  reducer: rootReducer
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 type TApplicationActions = any;
 
